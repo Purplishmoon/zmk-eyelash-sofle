@@ -78,6 +78,41 @@
 
             label = "SHIFT_MCLK";
         };
+
+        path_batch_src_pc: path_batch_src_pc {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp C &kp D &kp SPACE &kp FSLH &kp LS(A) &kp P &kp P &kp L &kp FSLH &kp S &kp R &kp C &kp FSLH &kp B &kp A &kp T &kp C &kp H &kp FSLH &kp P &kp C &kp FSLH>;
+            label = "PATH_BATCH_SRC_PC";
+        };
+
+        path_make_folder: path_make_folder {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp C &kp D &kp SPACE &kp FSLH &kp LS(A) &kp P &kp P &kp L &kp FSLH &kp M &kp A &kp K &kp E &kp FSLH &kp B &kp A &kp T &kp C &kp H>;
+            label = "PATH_MAKE_FOLDER";
+        };
+
+        cmd_make: cmd_make {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp M &kp A &kp K &kp E &kp SPACE &kp MINUS &kp F &kp SPACE &kp M &kp A &kp K &kp E &kp DOT &kp SPACE &kp A &kp L &kp L>;
+            label = "CMD_MAKE";
+        };
+
+        path_bin: path_bin {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp C &kp D &kp SPACE &kp FSLH &kp LS(A) &kp P &kp P &kp L &kp FSLH &kp B &kp I &kp N>;
+            label = "PATH_BIN";
+        };
+
+        path_etc_data: path_etc_data {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp FSLH &kp LS(A) &kp P &kp P &kp L &kp FSLH &kp E &kp T &kp C &kp FSLH &kp D &kp A &kp T &kp A>;
+            label = "PATH_ETC_DATA";
+        };
     };
 
     keymap {
