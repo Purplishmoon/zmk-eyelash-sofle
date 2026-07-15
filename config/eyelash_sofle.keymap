@@ -9,7 +9,6 @@
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/outputs.h>
 #include <dt-bindings/zmk/pointing.h>
-#include <dt-bindings/zmk/rgb.h>
 
 &mmv_input_listener { input-processors = <&zip_xy_scaler 2 1>; };
 
@@ -61,7 +60,8 @@
             #binding-cells = <2>;
             quick-tap-ms = <175>;
             tapping-term-ms = <200>;
-            flavor = "balanced";
+            flavor = "tap-preferred";
+            hold-while-undecided;
         };
     };
 
@@ -70,7 +70,7 @@
 
         softoff {
             bindings = <&soft_off>;
-            key-positions = <14 28 40>;
+            key-positions = <28 40 14>;
         };
     };
 
@@ -124,6 +124,13 @@
             bindings = <&kp FSLH &kp LS(A) &kp P &kp P &kp L &kp FSLH &kp E &kp T &kp C &kp FSLH &kp D &kp A &kp T &kp A>;
             label = "PATH_ETC_DATA";
         };
+
+        path_etc_report: path_report {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp FSLH &kp LS(A) &kp P &kp P &kp L &kp FSLH &kp E &kp T &kp C &kp FSLH &kp R &kp E &kp P &kp O &kp R &kp T>;
+            label = "PATH_REPORT";
+        };
     };
 
     keymap {
@@ -144,11 +151,11 @@
 
         layer_1 {
             bindings = <
-&kp GRAVE   &kp F1           &kp F2          &kp F3           &kp F4           &kp F5             &mmv MOVE_UP     &kp F6           &kp F7           &kp F8      &kp F9     &kp F10           &trans
-&trans      &kp GRAVE        &mkp LCLK       &mkp MCLK        &mkp RCLK        &mkp MB4           &mmv MOVE_DOWN   &kp PG_UP        &kp END          &kp UP      &kp HOME   &kp MINUS         &kp EQUAL
-&trans      &kp TILDE        &trans          &trans           &trans           &mkp MB5           &mmv MOVE_LEFT   &kp PG_DN        &kp LEFT         &kp DOWN    &kp RIGHT  &kp LEFT_BRACKET  &kp RIGHT_BRACKET
-&trans      &rgb_ug RGB_OFF  &rgb_ug RGB_ON  &rgb_ug RGB_EFF  &rgb_ug RGB_EFR  &rgb_ug RGB_SPI    &mmv MOVE_RIGHT  &rgb_ug RGB_BRI  &rgb_ug RGB_BRD  &kp INSERT  &kp F11    &kp F12           &trans
-&kp C_MUTE  &trans           &trans          &trans           &trans           &trans             &mkp LCLK        &trans           &trans           &trans      &trans     &trans
+&kp GRAVE   &kp F1     &kp F2     &kp F3     &kp F4     &kp F5      &mmv MOVE_UP     &kp F6     &kp F7    &kp F8      &kp F9     &kp F10           &trans
+&trans      &kp GRAVE  &mkp LCLK  &mkp MCLK  &mkp RCLK  &mkp MB4    &mmv MOVE_DOWN   &kp PG_UP  &kp END   &kp UP      &kp HOME   &kp MINUS         &kp EQUAL
+&trans      &kp TILDE  &trans     &trans     &trans     &mkp MB5    &mmv MOVE_LEFT   &kp PG_DN  &kp LEFT  &kp DOWN    &kp RIGHT  &kp LEFT_BRACKET  &kp RIGHT_BRACKET
+&trans      &trans     &trans     &trans     &trans     &trans      &mmv MOVE_RIGHT  &trans     &trans    &kp INSERT  &kp F11    &kp F12           &trans
+&kp C_MUTE  &trans     &trans     &trans     &trans     &trans      &mkp LCLK        &trans     &trans    &trans      &trans     &trans
             >;
 
             sensor-bindings = <&rsr_vol &rsr_trans>;
@@ -157,11 +164,11 @@
 
         layer_2 {
             bindings = <
-&kp TILDE  &bt BT_SEL 0  &bt BT_SEL 1    &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4    &mmv MOVE_UP     &kp F6  &kp F7  &kp F8      &kp F9     &kp F10      &trans
-&trans     &bt BT_CLR    &bt BT_CLR_ALL  &trans        &trans        &trans          &mmv MOVE_DOWN   &trans  &trans  &kp F11     &kp F12    &kp UNDER    &kp PLUS
-&trans     &out OUT_USB  &out OUT_BLE    &trans        &trans        &trans          &mmv MOVE_LEFT   &trans  &trans  &trans      &trans     &kp LBRC     &kp RBRC
-&trans     &sys_reset    &trans          &bootloader   &trans        &trans          &mmv MOVE_RIGHT  &trans  &trans  &sys_reset  &soft_off  &bootloader  &trans
-&trans     &trans        &trans          &trans        &trans        &trans          &mkp LCLK        &trans  &trans  &trans      &trans     &trans
+&kp TILDE  &bt BT_SEL 0  &bt BT_SEL 1    &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4    &mmv MOVE_UP     &kp F6              &kp F7            &kp F8      &kp F9     &kp F10      &trans
+&trans     &bt BT_CLR    &bt BT_CLR_ALL  &trans        &trans        &trans          &mmv MOVE_DOWN   &path_batch_src_pc  &path_bin         &kp F11     &kp F12    &kp UNDER    &kp PLUS
+&trans     &out OUT_USB  &out OUT_BLE    &trans        &trans        &trans          &mmv MOVE_LEFT   &path_make_folder   &cmd_make         &trans      &trans     &kp LBRC     &kp RBRC
+&trans     &sys_reset    &trans          &bootloader   &trans        &trans          &mmv MOVE_RIGHT  &path_etc_data      &path_etc_report  &sys_reset  &soft_off  &bootloader  &trans
+&trans     &trans        &trans          &trans        &trans        &trans          &mkp LCLK        &trans              &trans            &trans      &trans     &trans
             >;
 
             display-name = "LAYER2";
